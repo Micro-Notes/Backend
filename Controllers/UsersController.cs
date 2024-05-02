@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
+using Backend.Models;
 
 namespace Backend.Controllers;
 
@@ -12,5 +14,12 @@ public class UsersController : ControllerBase
     public UsersController(BaseContext context)
     {
         _context = context;
+    }
+    
+    // Listado de usuarios
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+    {
+        return await _context.Users.ToListAsync();
     }
 }
