@@ -8,6 +8,7 @@ public class BaseContext: DbContext
     public BaseContext(DbContextOptions<BaseContext> options) : base(options)
     {
     }
-    DbSet<User> users { get; set; }
-    DbSet<Note> Notes { get; set; }
+
+    public DbSet<User> Users { get; set; }
+    public DbSet<Note> Notes { get; set; }
 }
