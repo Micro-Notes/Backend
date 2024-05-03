@@ -61,4 +61,19 @@ public class NotesController : ControllerBase
         
         return NoContent();
     }
+    
+    // Actualización de notas
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutNote(int id, Note note)
+    {
+        if (id != note.Id)
+        {
+            return BadRequest();
+        }
+
+        _context.Entry(note).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }
