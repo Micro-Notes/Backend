@@ -45,4 +45,20 @@ public class NotesController : ControllerBase
         
         return CreatedAtAction(nameof(GetNote), new {id = note.Id}, note);
     }
+    
+    // Eliminación de notas
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteNote(int id)
+    {
+        var note = await _context.Notes.FindAsync(id);
+        if (note == null)
+        {
+            return NotFound();
+        }
+        
+        _context.Notes.Remove(note);
+        await _context.SaveChangesAsync();
+        
+        return NoContent();
+    }
 }
