@@ -22,4 +22,17 @@ public class NotesController : ControllerBase
     {
         return await _context.Notes.ToListAsync();
     }
+    
+    // Detalles de notas
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Note>> GetNote(int id)
+    {
+        var note = await _context.Notes.FindAsync(id);
+        if (note == null)
+        {
+            return NotFound();
+        }
+        
+        return note;
+    }
 }
