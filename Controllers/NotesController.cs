@@ -35,4 +35,14 @@ public class NotesController : ControllerBase
         
         return note;
     }
+        
+    // Creación de notas
+    [HttpPost]
+    public async Task<ActionResult<Note>> PostNote(Note note)
+    {
+        _context.Notes.Add(note);
+        await _context.SaveChangesAsync();
+        
+        return CreatedAtAction(nameof(GetNote), new {id = note.Id}, note);
+    }
 }
